@@ -1,19 +1,21 @@
 <?php
 
-function add_external_files() {
+function add_external_files()
+{
 	wp_enqueue_style('style', get_template_directory_uri() . '/css/style.css');
 	wp_enqueue_script('main', get_template_directory_uri() . '/js/main.js', array('jquery'), false, true);
 }
 
-add_action( 'wp_enqueue_scripts', 'add_external_files' );
+add_action('wp_enqueue_scripts', 'add_external_files');
 
 
-function mlp_customize_register($wp_customize) {
+function mlp_customize_register($wp_customize)
+{
 	// Add section Header
 	$wp_customize->add_section('section1', array(
 		'title' => __('Section 1', 'mylandingpage'),
 		'description' => 'MLP Section 1',
-		'priority' => 230	
+		'priority' => 230
 	));
 
 	//------- HEADER ------------
@@ -40,9 +42,25 @@ function mlp_customize_register($wp_customize) {
 	$wp_customize->add_control('header_cta_content', array(
 		'label' => __('Header Cta', 'mylandingpage'),
 		'section' => 'section1',
-		'priority' => 2 
+		'priority' => 2
 	));
 
 	//------- END HEADER CTA ---------
+
+
+	//------- COMPANY NAME -------------
+	$wp_customize->add_setting('company_name_content', array(
+		'default' => 'Company Name',
+		'type' => 'theme_mod'
+	));
+
+	$wp_customize->add_control('company_name_content', array(
+		'label' => __('Company name', 'mylandingpage'),
+		'section' => 'section1',
+		'priority' => 3
+	));
+
+	//------- END COMPANY NAME CTA -------------
 }
+
 add_action('customize_register', 'mlp_customize_register');
